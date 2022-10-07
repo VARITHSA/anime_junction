@@ -1,5 +1,7 @@
 import 'package:anime_junction/onboarding/onboarding.dart';
 import 'package:anime_junction/pages/interface_page.dart';
+import 'package:anime_junction/pages/login_page.dart';
+import 'package:anime_junction/pages/signUp_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -26,6 +28,8 @@ class MyApp extends StatelessWidget {
       home: const OnboardingScreen(),
       routes: {
         Routes.interfaceRoute: (context) => const InterfacePage(),
+        Routes.loginPageRoute: (context) => const LoginPage(),
+        Routes.signUpPageRoute: (context) => const SignUpPage(),
       },
     );
   }
