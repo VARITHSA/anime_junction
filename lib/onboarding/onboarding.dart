@@ -66,7 +66,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       ),
       body: Stack(
         children: [
-          Expanded(
+          Container(
             child: PageView(
               scrollDirection: Axis.horizontal,
               controller: onboardingcontroller,
@@ -237,70 +237,54 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               ],
             ),
           ),
-          _currentPage != _numPage - 1
-              ? Positioned(
-                  top: 700,
-                  left: 320,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(60, 60),
-                      shape: const CircleBorder(),
-                      backgroundColor: ickcolor,
-                      shadowColor: ickcolor,
-                      elevation: 20,
-                    ),
-                    onPressed: (() {
-                      onboardingcontroller.nextPage(
-                          duration: const Duration(milliseconds: 400),
-                          curve: Curves.ease);
-                    }),
-                    child: const Center(
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 25,
-                      ),
-                    ),
-                  ),
-                )
-              : Positioned(
-                  top: 700,
-                  left: 70,
-                  child: InkWell(
-                    focusColor: Colors.white,
-                    highlightColor: Colors.white,
-                    onTap: () {
-                      Navigator.pushNamed(context, Routes.interfaceRoute);
-                    },
-                    child: Container(
-                      height: 60,
-                      width: 250,
-                      decoration: BoxDecoration(
-                        color: ickcolor,
-                        borderRadius: BorderRadius.circular(25),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: ickcolor,
-                            offset: Offset(0.0, 1),
-                            spreadRadius: 2,
-                            blurRadius: 23,
-                          )
-                        ],
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "GET STARTED",
-                          style: TextStyle(
-                              fontFamily: 'Gilroy',
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ),
-                  ),
-                )
         ],
       ),
+      floatingActionButton: _currentPage != _numPage - 1
+          ? FloatingActionButton(
+              onPressed: () {
+                onboardingcontroller.nextPage(
+                    duration: const Duration(milliseconds: 400),
+                    curve: Curves.ease);
+              },
+              backgroundColor: ickcolor,
+              child: const Center(child: Icon(Icons.arrow_forward_ios_rounded)),
+            )
+          : InkWell(
+              focusColor: Colors.white,
+              highlightColor: Colors.white,
+              onTap: () {
+                Navigator.pushNamed(context, Routes.interfaceRoute);
+              },
+              child: Container(
+                height: 60,
+                width: 250,
+                decoration: BoxDecoration(
+                  color: ickcolor,
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: ickcolor,
+                      offset: Offset(0.0, 1),
+                      spreadRadius: 2,
+                      blurRadius: 23,
+                    )
+                  ],
+                ),
+                child: const Center(
+                  child: Text(
+                    "GET STARTED",
+                    style: TextStyle(
+                        fontFamily: 'Gilroy',
+                        color: Colors.white,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+      floatingActionButtonLocation: _currentPage != _numPage - 1
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.centerFloat,
     );
   }
 }
